@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/mongodb-dotnet-sample.props" />
+</Project>

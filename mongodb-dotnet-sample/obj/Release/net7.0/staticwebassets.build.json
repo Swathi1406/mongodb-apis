@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "LwwVCOb77s8Ebj+uCPBrvkLP8o3Lm7J3Eagxt8XJ+RU=",
+  "Source": "mongodb-dotnet-sample",
+  "BasePath": "_content/mongodb-dotnet-sample",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
