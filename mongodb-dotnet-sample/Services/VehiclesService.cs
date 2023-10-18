@@ -7,14 +7,20 @@ namespace mongodb_dotnet_sample.Services
 {
     public class VehiclesService
     {
-        private readonly IMongoCollection<Vehicle> _games;
+        private readonly IMongoCollection<Vehicle>? _games;
 
         public VehiclesService(IVehiclesDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
-            var database = client.GetDatabase(settings.DatabaseName);
+            try {
+                var client = new MongoClient(settings.ConnectionString);
+                var database = client.GetDatabase(settings.DatabaseName);
 
-            _games = database.GetCollection<Vehicle>(settings.VehiclesCollectionName);
+                _games = database.GetCollection<Vehicle>(settings.VehiclesCollectionName);
+            }catch(Exception e) {
+                Console.WriteLine(e.StackTrace);
+                throw e;
+            }
+            
         }
 
         public List<Vehicle> Get() => _games.Find(game => true).ToList();

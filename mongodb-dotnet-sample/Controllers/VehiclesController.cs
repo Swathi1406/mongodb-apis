@@ -10,27 +10,49 @@ namespace mongodb_dotnet_sample.Controllers
     public class VehiclesController : ControllerBase
     {
         private readonly VehiclesService _gameService;
+        private readonly ILogger<VehiclesController> _logger;
 
-        public VehiclesController(VehiclesService gamesService)
+
+        public VehiclesController(VehiclesService gamesService, ILogger<VehiclesController> logger)
         {
             _gameService = gamesService;
+            _logger = logger;
         }
 
         [HttpGet]
-        public ActionResult<List<Vehicle>> Get() =>
-            _gameService.Get();
+        public ActionResult<List<Vehicle>> Get() {
+
+            try {
+                return _gameService.Get();
+
+            }
+            catch (Exception e) {
+                _logger.LogError(e.StackTrace);
+                throw e;
+            }
+        }
 
         [HttpGet("{id:length(24)}", Name = "GetGame")]
         public ActionResult<Vehicle> Get(string id)
         {
-            var game = _gameService.Get(id);
-
-            if (game == null)
+            try
             {
-                return NotFound();
-            }
+                var game = _gameService.Get(id);
 
-            return game;
+                if (game == null)
+                {
+                    return NotFound();
+                }
+
+                return game;
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.StackTrace);
+                throw e;
+            }
+            
         }
 
         [HttpPost]

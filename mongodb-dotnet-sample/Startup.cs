@@ -35,6 +35,13 @@ namespace mongodb_dotnet_sample
 
             services.AddSingleton<VehiclesService>();
 
+            services.AddLogging(builder =>
+            {
+                builder.AddConsole(); // Add the console logger
+                builder.AddDebug();   // Add the debug logger
+                                      // You can add other loggers here (e.g., AddFile, AddEventLog, etc.)
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
