@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/mongodb-dotnet-sample.props" />
-</Project>
